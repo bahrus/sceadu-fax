@@ -1,4 +1,4 @@
-import {XtalFragment, loadFragment} from './xtal-fragment.js';
+import {XtalFragment, loadFragment} from 'xtal-fragment/xtal-fragment.js';
 import {xc, PropAction, PropDefMap} from 'xtal-element/lib/XtalCore.js';
 export class SceaduFæx extends XtalFragment{
     static is = 'sceadu-fæx';
