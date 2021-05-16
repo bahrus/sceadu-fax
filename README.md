@@ -6,7 +6,7 @@ There's a [promising](https://github.com/WICG/webcomponents/issues/909) proposal
 
 sceadu-fæx is a web component that provides limited support for slotting without using native ShadowDOM -- sticking to light children.  It also does it outside the confines of a traditional web component, where the ShadowDOM is kinda/sorta nested in a kind of parent/child relationship.  So this implementation is definitely not a drop-in "ShadowDOM slotting without ShadowDOM" replacement, as there are significant differences in behavior.
 
-sceadu-fæx extends [xtal-fragment](https://github.com/bahrus/xtal-fragment), and thus inherits its basic syntax.  xtal-fragment lacks ShadowDOM slotting emulation, which is the value-add proposition sceadu-fæx provides.
+sceadu-fæx extends [xtal-fragment](https://github.com/bahrus/xtal-fragment), and thus inherits its basic syntax.  xtal-fragment lacks ShadowDOM-lite slotting emulation, which is the value-add proposition sceadu-fæx provides.
 
 Perhaps it is best to describe what sceadu-fæx does with an example:
 
