@@ -19,7 +19,7 @@ Perhaps it is best to describe what sceadu-fæx does with an example:
 </fieldset>
 </template>
 
-<sceadu-fæx copy from=./my-field-category-holder><template>
+<sceadu-fæx copy from=my-field-category-holder><template>
     <h3 slot=label>My Legend</h3>
     <my-grid slot=field-container></my-grid>
     <my-chart slot=field-container></my-chart>
@@ -29,7 +29,11 @@ Perhaps it is best to describe what sceadu-fæx does with an example:
 generates:
 
 ```html
-<sceadu-fæx style=display:none copy from=./my-field-category-holder></sceadu-fæx>
+<template id=my-field-category-holder>
+...
+</template>
+
+<sceadu-fæx style=display:none copy from=my-field-category-holder></sceadu-fæx>
 <make-fieldset-expandable></make-fieldset-expandable>
 <fieldset>
   <legend><slot name=label><h3 slot=label>My Legend</h3></slot></legend>
@@ -49,7 +53,7 @@ generates:
 
 If a new template child of sceadu-fæx appears, replacing the old one, it is cloned and the previously slotted content replaced.  This means state/event handlers can be lost.
 
-However, if the tagName matches, and if the method "morfMerge" exists on the new element, the old element it is replacing is passed into the method morfMerge.  The new element can use this method to transfer state and eventHandlers (well, state anyway). 
+However, if the tagName matches, and if the method "mergeState" exists on the new element, the old element it is replacing is passed into the method mergeState.  The new element can use this method to transfer state and eventHandlers (well, state anyway). 
 
 ## Customizing how slot elements are rendered, Part I [TODO].
 
