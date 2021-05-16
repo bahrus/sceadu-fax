@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <template id=my-field-category-holder>
+        <make-fieldset-expandable></make-fieldset-expandable>
+        <fieldset>
+          <legend><slot name=label></slot></legend>
+          <slot name=field-container></slot>
+        </fieldset>
+        </template>
+        
+    <sceadu-fæx copy from=./my-field-category-holder>
+        <template>
+        <h3 slot=label>My Legend</h3>
+        <my-grid slot=field-container></my-grid>
+        <my-chart slot=field-container></my-chart>
+        </template>
+    </sceadu-fæx>
+    <script type=importmap>
+        {
+            "imports":{
+                "xtal-element/": "../node_modules/xtal-element/",
+                "trans-render/": "../node_modules/trans-render/"
+            }
+        }
+    </script>
+    <script type=module>
+        import '../sceadu-fæx.js';
+    </script>
+</body>
+</html>
