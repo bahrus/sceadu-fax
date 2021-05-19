@@ -5,6 +5,7 @@ export class SceaduFæx extends XtalFragment{
     isVisual = true;
     propActions = propActions;
     clonedTemplateCallback(clonedTemplate: DocumentFragment){
+        super.clonedTemplateCallback(clonedTemplate);
         const clonedLightTemplate = this.lightTemplate!.content.cloneNode(true) as DocumentFragment;
         const slotKeys: {[key:string]: HTMLElement[]} = {};
         clonedLightTemplate.querySelectorAll('[slot]').forEach(el => {

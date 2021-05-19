@@ -7,6 +7,7 @@ export class SceaduFæx extends XtalFragment {
         this.propActions = propActions;
     }
     clonedTemplateCallback(clonedTemplate) {
+        super.clonedTemplateCallback(clonedTemplate);
         const clonedLightTemplate = this.lightTemplate.content.cloneNode(true);
         const slotKeys = {};
         clonedLightTemplate.querySelectorAll('[slot]').forEach(el => {
