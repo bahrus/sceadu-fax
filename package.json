@@ -8,10 +8,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "xtal-element": "0.0.393",
-    "xtal-fragment": "0.0.1"
+    "xtal-element": "0.0.400",
+    "xtal-fragment": "0.0.5"
   },
   "devDependencies": {
+    "xt-f": "0.0.1",
     "xtal-test": "0.0.50"
   },
   "repository": {

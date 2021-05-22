@@ -16,8 +16,10 @@ export class SceaduFæx extends XtalFragment{
             slotKeys[slot].push(el as HTMLElement);
         });
         for(const key in slotKeys){
-            const slotEl = clonedTemplate.querySelector(`slot[name="${key}"]`);
-            slotEl?.append(...slotKeys[key]);
+            const slotEl = clonedTemplate.querySelector(`xt-f[name="${key}"]`);
+            if(slotEl === null) continue;
+            (<any>slotEl).pipedChunk = slotKeys[key];
+            //slotEl?.append(...slotKeys[key]);
         }
     };
     lightTemplate: HTMLTemplateElement | undefined;

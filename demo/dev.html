@@ -10,8 +10,8 @@
     <template id=my-field-category-holder>
         <make-fieldset-expandable></make-fieldset-expandable>
         <fieldset>
-          <legend><slot name=label></slot></legend>
-          <slot name=field-container></slot>
+          <legend><xt-f name=label></xt-f></legend>
+          <xt-f name=field-container></xt-f>
         </fieldset>
     </template>
         
@@ -25,12 +25,14 @@
             "imports":{
                 "xtal-element/": "../node_modules/xtal-element/",
                 "trans-render/": "../node_modules/trans-render/",
-                "xtal-fragment/": "../node_modules/xtal-fragment/"
+                "xtal-fragment/": "../node_modules/xtal-fragment/",
+                "xt-f/": "../node_modules/xt-f/"
             }
         }
     </script>
     <script type=module>
         import '../sceadu-fæx.js';
+        import 'xt-f/xt-f.js';
     </script>
 </body>
 </html>
