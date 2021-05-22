@@ -14,8 +14,8 @@ Perhaps it is best to describe what sceadu-fæx does with an example:
 <template id=my-field-category-holder>
 <make-fieldset-expandable></make-fieldset-expandable>
 <fieldset>
-  <legend><slot name=label></slot></legend>
-  <slot name=field-container></slot>
+  <legend><slot-nik name=label></slot-nik></legend>
+  <slot-nik name=field-container></slot-nik>
 </fieldset>
 </template>
 
@@ -36,13 +36,17 @@ generates:
 <sceadu-fæx style=display:none copy from=my-field-category-holder></sceadu-fæx>
 <make-fieldset-expandable></make-fieldset-expandable>
 <fieldset>
-  <legend><slot name=label><h3 slot=label>My Legend</h3></slot></legend>
-  <slot name=field-container>
-    <my-grid slot=field-container></my-grid>
-    <my-chart slot=field-container></my-chart>
-  </slot>
+  <legend>
+      <slot-nik name=label style=display:none></slot-nik>
+      <h3 slot=label>My Legend</h3>
+  </legend>
+  <slot-nik name=field-container style=display:none></slot-nik>
+  <my-grid slot=field-container></my-grid>
+  <my-chart slot=field-container></my-chart>
 </fieldset>
 ```
+
+As we can see, sceadu-fæx works best in conjunction with web component [slot-nik](https://github.com/bahrus/slot-nik).
 
 **NB:**  This component might not play well with other rendering libraries. For a rendering library to be compatible with this component, it must use the following API:
 
