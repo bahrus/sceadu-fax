@@ -12,7 +12,7 @@
     "xtal-fragment": "0.0.5"
   },
   "devDependencies": {
-    "xt-f": "0.0.1",
+    "slot-nik": "0.0.1",
     "xtal-test": "0.0.50"
   },
   "repository": {

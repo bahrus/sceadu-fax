@@ -18,7 +18,7 @@ export class SceaduFæx extends XtalFragment {
             slotKeys[slot].push(el);
         });
         for (const key in slotKeys) {
-            const slotEl = clonedTemplate.querySelector(`xt-f[name="${key}"]`);
+            const slotEl = clonedTemplate.querySelector(`slot-nik[name="${key}"]`);
             if (slotEl === null)
                 continue;
             slotEl.pipedChunk = slotKeys[key];

@@ -10,8 +10,8 @@
     <template id=my-field-category-holder>
         <make-fieldset-expandable></make-fieldset-expandable>
         <fieldset>
-          <legend><xt-f name=label></xt-f></legend>
-          <xt-f name=field-container></xt-f>
+          <legend><slot-nik name=label></slot-nik></legend>
+          <slot-nik name=field-container></slot-nik>
         </fieldset>
     </template>
         
@@ -26,13 +26,14 @@
                 "xtal-element/": "../node_modules/xtal-element/",
                 "trans-render/": "../node_modules/trans-render/",
                 "xtal-fragment/": "../node_modules/xtal-fragment/",
-                "xt-f/": "../node_modules/xt-f/"
+                "xt-f/": "../node_modules/xt-f/",
+                "slot-nik/": "../node_modules/slot-nik/"
             }
         }
     </script>
     <script type=module>
         import '../sceadu-fæx.js';
-        import 'xt-f/xt-f.js';
+        import 'slot-nik/slot-nik.js';
     </script>
 </body>
 </html>
