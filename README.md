@@ -1,6 +1,6 @@
 # sceadu-fæx
 
-## Shadow DOM Facsimile
+## Shadow DOM Facsimile [TODO]
 
 There's a [promising](https://github.com/WICG/webcomponents/issues/909) proposal that recognizes that the slot mechanism ShadowDOM provides is useful even outside the confines of style encapsulation.
 
@@ -14,16 +14,17 @@ Perhaps it is best to describe what sceadu-fæx does with an example:
 <template id=my-field-category-holder>
 <make-fieldset-expandable></make-fieldset-expandable>
 <fieldset>
-  <legend><slot-nik name=label></slot-nik></legend>
+  <legend><slot-nik name=label>My {{nameOfCategory}}</slot-nik></legend>
   <slot-nik name=field-container></slot-nik>
 </fieldset>
 </template>
 
-<sceadu-fæx copy from=my-field-category-holder><template>
-    <h3 slot=label>My Legend</h3>
-    <my-grid slot=field-container></my-grid>
-    <my-chart slot=field-container></my-chart>
-</template></sceadu-fæx>
+<sceadu-fæx copy from=my-field-category-holder>
+    <templ-model name-of-category="First Category"></templ-model>
+    <ref-to element=h3 slot=label></ref-to>
+    <ref-to element=my-grid slot=field-container></ref-to>
+    <ref-to element=my-chart slot=field-container></ref-to>
+</sceadu-fæx>
 ```
 
 generates:
@@ -33,12 +34,17 @@ generates:
 ...
 </template>
 
-<sceadu-fæx style=display:none copy from=my-field-category-holder></sceadu-fæx>
+<sceadu-fæx style=display:none copy from=my-field-category-holder>
+    <templ-model name-of-category="First Category"></templ-model>
+    <ref-to element=h3 slot=label></ref-to>
+    <ref-to element=my-grid slot=field-container></ref-to>
+    <ref-to element=my-chart slot=field-container></ref-to>
+</sceadu-fæx>
 <make-fieldset-expandable></make-fieldset-expandable>
 <fieldset>
   <legend>
       <slot-nik name=label style=display:none></slot-nik>
-      <h3 slot=label>My Legend</h3>
+      <h3 slot=label>My First Category</h3>
   </legend>
   <slot-nik name=field-container style=display:none></slot-nik>
   <my-grid slot=field-container></my-grid>
@@ -53,9 +59,10 @@ As we can see, sceadu-fæx works best in conjunction with web component [slot-ni
 1.  If the contents "grouped" by sceadu-fæx need to be moved to a new location in the DOM tree, this should be done via newDestination.appendChild($0.extractContents()) where $0 is the instance of sceadu-fæx.
 2.  The rendering library may need to skip over the owned siblings when updating the DOM, via $0.nextUngroupedSibling, where $0 is the instance of sceadu-fæx (unless the renderer is aware of the contents of the template sceadu-fæx is copying from).
 
-## What happens when the template child of sceadu-fæx gets replaced? [TODO]
+## What happens when the light children change?
 
-If a new template child of sceadu-fæx appears, replacing the old one, it is cloned and the previously slotted content replaced.  This means state/event handlers can be lost.
+1.  If ref-to removed, the element it created is removed.
+2.  If ref-to added with a slot attribute, it is appended to the grouped sibling managed for that slot.
+3.  Changes to the actual element must be done via refToElement.myElement, if it exists.
 
-However, if the tagName matches, and if the method "mergeState" exists on the new element, the old element it is replacing is passed into the method mergeState.  The new element can use this method to transfer state and eventHandlers (well, state anyway). 
 
