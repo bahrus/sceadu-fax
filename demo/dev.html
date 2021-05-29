@@ -10,15 +10,15 @@
     <template id=my-field-category-holder>
         <make-fieldset-expandable></make-fieldset-expandable>
         <fieldset>
-          <legend><slot-nik name=label></slot-nik></legend>
+          <legend>{{label}}</legend>
           <slot-nik name=field-container></slot-nik>
         </fieldset>
     </template>
         
     <sceadu-fæx copy from=./my-field-category-holder><template>
-        <h3 slot=label>My Legend</h3>
-        <my-grid slot=field-container></my-grid>
-        <my-chart slot=field-container></my-chart>
+        <templ-model label="My Legend"></templ-model>
+        <ref-to a=my-grid slot=field-container></ref-to>
+        <ref-to a=my-chart slot=field-container></ref-to>
     </template></sceadu-fæx>
     <script type=importmap>
         {
@@ -27,13 +27,16 @@
                 "trans-render/": "../node_modules/trans-render/",
                 "xtal-fragment/": "../node_modules/xtal-fragment/",
                 "xt-f/": "../node_modules/xt-f/",
-                "slot-nik/": "../node_modules/slot-nik/"
+                "slot-nik/": "../node_modules/slot-nik/",
+                "templ-model/": "../node_modules/templ-model/",
+                "ref-to/": "../node_modules/ref-to/"
             }
         }
     </script>
     <script type=module>
         import '../sceadu-fæx.js';
         import 'slot-nik/slot-nik.js';
+        import 'templ-model/templ-model.js';
     </script>
 </body>
 </html>

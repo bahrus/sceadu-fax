@@ -9,8 +9,8 @@
 		"watch": true
 	},
 	"files": [
-		"xtal-fragment.ts",
-		"sceadu-fæx.ts"
+		"sceadu-fæx.ts",
+		"shadow-fax.ts"
 	],
 	"exclude":[
 		"build",

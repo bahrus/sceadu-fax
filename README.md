@@ -4,7 +4,7 @@
 
 There's a [promising](https://github.com/WICG/webcomponents/issues/909) proposal that recognizes that the slot mechanism ShadowDOM provides is useful even outside the confines of style encapsulation.
 
-sceadu-fæx is a web component that provides limited support for slotting without using native ShadowDOM -- sticking to light children.  It also does it outside the confines of a traditional web component, where the ShadowDOM is kinda/sorta nested in a kind of parent/child relationship.  So this implementation is definitely not a drop-in "ShadowDOM slotting without ShadowDOM" replacement, as there are significant differences in behavior.
+sceadu-fæx (or alternatively shadow-fax) is a web component that provides limited support for slotting without using native ShadowDOM -- sticking to light children.  It also does it outside the confines of a traditional web component, where the ShadowDOM is kinda/sorta nested in a kind of parent/child relationship.  So this implementation is definitely not a drop-in "ShadowDOM slotting without ShadowDOM" replacement, as there are significant differences in behavior.
 
 sceadu-fæx extends [xtal-fragment](https://github.com/bahrus/xtal-fragment), and thus inherits its basic syntax.  xtal-fragment lacks ShadowDOM-lite slotting emulation, which is the value-add proposition sceadu-fæx provides.
 
@@ -19,11 +19,11 @@ Perhaps it is best to describe what sceadu-fæx does with an example:
 </fieldset>
 </template>
 
-<sceadu-fæx copy from=my-field-category-holder>
+<sceadu-fæx from=my-field-category-holder>
     <templ-model name-of-category="First Category"></templ-model>
-    <ref-to element=h3 slot=label></ref-to>
-    <ref-to element=my-grid slot=field-container></ref-to>
-    <ref-to element=my-chart slot=field-container></ref-to>
+    <ref-to a=h3 slot=label></ref-to>
+    <ref-to a=my-grid slot=field-container></ref-to>
+    <ref-to a=my-chart slot=field-container></ref-to>
 </sceadu-fæx>
 ```
 
@@ -34,11 +34,11 @@ generates:
 ...
 </template>
 
-<sceadu-fæx style=display:none copy from=my-field-category-holder>
+<sceadu-fæx style=display:none from=my-field-category-holder>
     <templ-model name-of-category="First Category"></templ-model>
-    <ref-to element=h3 slot=label></ref-to>
-    <ref-to element=my-grid slot=field-container></ref-to>
-    <ref-to element=my-chart slot=field-container></ref-to>
+    <ref-to a=h3 slot=label></ref-to>
+    <ref-to a=my-grid slot=field-container></ref-to>
+    <ref-to a=my-chart slot=field-container></ref-to>
 </sceadu-fæx>
 <make-fieldset-expandable></make-fieldset-expandable>
 <fieldset>
