@@ -34,7 +34,7 @@ export class SceaduFæx extends XtalFragment {
         const slot = sr.firstChild;
         sr.addEventListener('slotchange', e => {
             if (this.groupedLightChildren !== undefined) {
-                console.error('Change to light children ignored'); //TODO?
+                //console.error('Change to light children ignored'); //TODO?
                 return;
             }
             const assignedElements = slot.assignedElements();
@@ -59,6 +59,29 @@ export class SceaduFæx extends XtalFragment {
             }
             this.groupedLightChildren = groupedLightChildren;
             this.copy = true;
+            slot.addEventListener('element-created', e => {
+                const refTo = e.target;
+                const slotnik = refTo.getAttribute('slot-nik') || '';
+                //TODO:  figure out why this.groupedRange isn't working.
+                let ns = this.nextElementSibling;
+                while (ns !== null) {
+                    let dest;
+                    for (const slot of ns.querySelectorAll('slot-nik')) {
+                        if (slotnik !== '') {
+                            if (slot.getAttribute('name') !== slotnik)
+                                continue;
+                        }
+                        else {
+                            if (slot.hasAttribute('name'))
+                                continue;
+                        }
+                        slot.pipedChunk = refTo.deref;
+                    }
+                    if (ns === this.lastGroupedSibling)
+                        break;
+                    ns = ns.nextElementSibling;
+                }
+            });
         });
     }
 }

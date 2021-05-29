@@ -15,11 +15,20 @@
         </fieldset>
     </template>
         
-    <sceadu-fæx from=./my-field-category-holder>
+    <sceadu-fæx id=sf from=./my-field-category-holder>
         <templ-model label="My Legend"></templ-model>
         <ref-to a=my-grid slot-nik=field-container></ref-to>
         <ref-to a=my-chart slot-nik=field-container></ref-to>
     </sceadu-fæx>
+    <button onclick="insertNewElement()">Add element</button>
+    <script>
+        function insertNewElement(){
+            const newEl = document.createElement('ref-to');
+            newEl.setAttribute('a', 'my-filter');
+            newEl.setAttribute('slot-nik', 'field-container');
+            sf.appendChild(newEl);
+        }
+    </script>
     <script type=importmap>
         {
             "imports":{

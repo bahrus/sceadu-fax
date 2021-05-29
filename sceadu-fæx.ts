@@ -4,7 +4,8 @@ import {TemplModel} from 'templ-model/templ-model.js';
 import {RefTo} from 'ref-to/ref-to.js';
 import {GroupedLightChildren} from './types.d.js';
 import {TemplateInstance} from '@github/template-parts/lib/index.js';
-import { group } from 'node:console';
+import {applyMixins} from 'xtal-element/lib/applyMixins.js';
+import {GroupedSiblingsWithRefs} from 'xtal-element/lib/GroupedSiblingsWithRefs.js';
 
 export class SceaduFæx extends XtalFragment{
     static is = 'sceadu-fæx';
@@ -35,7 +36,7 @@ export class SceaduFæx extends XtalFragment{
         const slot = sr.firstChild as HTMLSlotElement;
         sr.addEventListener('slotchange', e => {
             if(this.groupedLightChildren !== undefined){
-                console.error('Change to light children ignored'); //TODO?
+                //console.error('Change to light children ignored'); //TODO?
                 return;
             }
             const assignedElements = slot.assignedElements();
@@ -60,10 +61,32 @@ export class SceaduFæx extends XtalFragment{
             }
             this.groupedLightChildren = groupedLightChildren;
             this.copy = true;
+            slot.addEventListener('element-created', e => {
+                const refTo = e.target as RefTo;
+                const slotnik = refTo.getAttribute('slot-nik') || '';
+                //TODO:  figure out why this.groupedRange isn't working.
+                let ns = this.nextElementSibling;
+                while(ns !== null){
+                    let dest: Element | undefined;
+                    for(const slot of ns.querySelectorAll('slot-nik')){
+                        if(slotnik!==''){
+                            if(slot.getAttribute('name') !== slotnik) continue;
+                        }else{
+                            if(slot.hasAttribute('name')) continue;
+                        }
+                        (<any>slot).pipedChunk = refTo.deref;
+                    }
+                    if(ns === this.lastGroupedSibling) break;
+                    ns = ns.nextElementSibling;
+                }
+                
+            });
         });
+    
     }
 
 }
+
 
 
 xc.define(SceaduFæx);
