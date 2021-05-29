@@ -50,7 +50,7 @@ export class SceaduFæx extends XtalFragment{
                     if(sk[slotnik] === undefined){
                         sk[slotnik] = [];
                     }
-                    sk[slotnik].push(lightChild);
+                    sk[slotnik].push(lightChild.deref);
                 }
             }
             this.groupedLightChildren = groupedLightChildren;

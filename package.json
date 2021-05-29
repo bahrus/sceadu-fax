@@ -11,7 +11,7 @@
     "xtal-element": "0.0.400",
     "xtal-fragment": "0.0.7",
     "templ-model": "0.0.3",
-    "ref-to": "0.0.1"
+    "ref-to": "0.0.2"
   },
   "devDependencies": {
     "slot-nik": "0.0.2",
