@@ -3,5 +3,5 @@ import {RefTo} from 'ref-to/ref-to.js';
 
 export interface GroupedLightChildren{
     templModel?: TemplModel,
-    slotKeys: {[key:string]: RefTo[]};
+    slotKeys: {[key:string]: Element[]};
 }

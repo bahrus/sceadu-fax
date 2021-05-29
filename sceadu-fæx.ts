@@ -36,6 +36,7 @@ export class SceaduFæx extends XtalFragment{
         sr.addEventListener('slotchange', e => {
             if(this.groupedLightChildren !== undefined){
                 console.error('Change to light children ignored'); //TODO?
+                return;
             }
             const assignedElements = slot.assignedElements();
             const groupedLightChildren = {
@@ -50,7 +51,11 @@ export class SceaduFæx extends XtalFragment{
                     if(sk[slotnik] === undefined){
                         sk[slotnik] = [];
                     }
-                    sk[slotnik].push(lightChild.deref);
+                    const ref = lightChild.deref;
+                    if(ref !== undefined){
+                        sk[slotnik].push(ref);
+                    }
+                    
                 }
             }
             this.groupedLightChildren = groupedLightChildren;
