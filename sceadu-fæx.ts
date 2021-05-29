@@ -3,31 +3,29 @@ import {xc, PropAction, PropDefMap} from 'xtal-element/lib/XtalCore.js';
 import {TemplModel} from 'templ-model/templ-model.js';
 import {RefTo} from 'ref-to/ref-to.js';
 import {GroupedLightChildren} from './types.d.js';
+import {TemplateInstance} from '@github/template-parts/lib/index.js';
 import { group } from 'node:console';
 
 export class SceaduFæx extends XtalFragment{
     static is = 'sceadu-fæx';
     isVisual = true;
-    //propActions = propActions;
-    clonedTemplateCallback(clonedTemplate: DocumentFragment){
-        // super.clonedTemplateCallback(clonedTemplate);
-        // const clonedLightTemplate = this.lightTemplate!.content.cloneNode(true) as DocumentFragment;
-        // const slotKeys: {[key:string]: HTMLElement[]} = {};
-        // clonedLightTemplate.querySelectorAll('[slot]').forEach(el => {
-        //     const slot = el.getAttribute('slot')!;
-        //     if(slotKeys[slot] === undefined){
-        //         slotKeys[slot] = [];
-        //     }
-        //     slotKeys[slot].push(el as HTMLElement);
-        // });
-        // for(const key in slotKeys){
-        //     const slotEl = clonedTemplate.querySelector(`slot-nik[name="${key}"]`);
-        //     if(slotEl === null) continue;
-        //     (<any>slotEl).pipedChunk = slotKeys[key];
-        //     //slotEl?.append(...slotKeys[key]);
-        // }
+    cloneTemplate(templ: HTMLTemplateElement){
+        const grouped = this.groupedLightChildren!;
+        let clonedTemplate: DocumentFragment;
+        if(grouped.templModel !== undefined){
+            clonedTemplate = new TemplateInstance(templ, grouped.templModel) as DocumentFragment;
+        }else{
+            clonedTemplate = super.cloneTemplate(templ);
+        }
+        const slotKeys = grouped.slotKeys;
+        for(const key in slotKeys){
+            const slotEl = clonedTemplate.querySelector(`slot-nik[name="${key}"]`);
+            if(slotEl === null) continue;
+            (<any>slotEl).pipedChunk = slotKeys[key];
+        }       
+        return clonedTemplate as DocumentFragment;
+    }
 
-    };
     groupedLightChildren: GroupedLightChildren | undefined;
     connectedCallback(){
         super.connectedCallback();
@@ -60,19 +58,16 @@ export class SceaduFæx extends XtalFragment{
     }
 
 }
-// export const loadFragmentWithSlots = ({copy, from, self}: SceaduFæx) => {
-//     loadFragment(self);
+
+// const propDefMap: PropDefMap<SceaduFæx> = {
+//     groupedLightChildren: {
+//         type: Object,
+//         async: true,
+//         dry: true,
+//         stopReactionsIfFalsy: true,
+//     }
 // };
-//const propActions = [loadFragmentWithSlots] as PropAction[];
-const propDefMap: PropDefMap<SceaduFæx> = {
-    groupedLightChildren: {
-        type: Object,
-        async: true,
-        dry: true,
-        stopReactionsIfFalsy: true,
-    }
-};
-const slicedPropDefs = xc.getSlicedPropDefs(propDefMap);
-xc.letThereBeProps(SceaduFæx, slicedPropDefs, 'onPropChange');
+// const slicedPropDefs = xc.getSlicedPropDefs(propDefMap);
+// xc.letThereBeProps(SceaduFæx, slicedPropDefs, 'onPropChange');
 xc.define(SceaduFæx);
 

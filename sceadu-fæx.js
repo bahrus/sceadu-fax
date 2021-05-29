@@ -1,61 +1,71 @@
-import { XtalFragment, loadFragment } from 'xtal-fragment/xtal-fragment.js';
+import { XtalFragment } from 'xtal-fragment/xtal-fragment.js';
 import { xc } from 'xtal-element/lib/XtalCore.js';
+import { TemplModel } from 'templ-model/templ-model.js';
+import { RefTo } from 'ref-to/ref-to.js';
+import { TemplateInstance } from '@github/template-parts/lib/index.js';
 export class SceaduFæx extends XtalFragment {
     constructor() {
         super(...arguments);
         this.isVisual = true;
-        this.propActions = propActions;
     }
-    clonedTemplateCallback(clonedTemplate) {
-        super.clonedTemplateCallback(clonedTemplate);
-        const clonedLightTemplate = this.lightTemplate.content.cloneNode(true);
-        const slotKeys = {};
-        clonedLightTemplate.querySelectorAll('[slot]').forEach(el => {
-            const slot = el.getAttribute('slot');
-            if (slotKeys[slot] === undefined) {
-                slotKeys[slot] = [];
-            }
-            slotKeys[slot].push(el);
-        });
+    cloneTemplate(templ) {
+        const grouped = this.groupedLightChildren;
+        let clonedTemplate;
+        if (grouped.templModel !== undefined) {
+            clonedTemplate = new TemplateInstance(templ, grouped.templModel);
+        }
+        else {
+            clonedTemplate = super.cloneTemplate(templ);
+        }
+        const slotKeys = grouped.slotKeys;
         for (const key in slotKeys) {
             const slotEl = clonedTemplate.querySelector(`slot-nik[name="${key}"]`);
             if (slotEl === null)
                 continue;
             slotEl.pipedChunk = slotKeys[key];
-            //slotEl?.append(...slotKeys[key]);
         }
+        return clonedTemplate;
     }
-    ;
     connectedCallback() {
         super.connectedCallback();
         const sr = this.attachShadow({ mode: 'open' });
         sr.innerHTML = "<slot></slot>";
         const slot = sr.firstChild;
         sr.addEventListener('slotchange', e => {
+            if (this.groupedLightChildren !== undefined) {
+                console.error('Change to light children ignored'); //TODO?
+            }
             const assignedElements = slot.assignedElements();
-            if (assignedElements.length === 0)
-                return;
-            const templ = assignedElements[0];
-            if (templ.localName !== 'template')
-                return;
-            this.lightTemplate = templ;
-            templ.remove();
+            const groupedLightChildren = {
+                slotKeys: {}
+            };
+            const sk = groupedLightChildren.slotKeys;
+            for (const lightChild of assignedElements) {
+                if (lightChild instanceof TemplModel) {
+                    groupedLightChildren.templModel = lightChild;
+                }
+                else if (lightChild instanceof RefTo) {
+                    const slot = lightChild.getAttribute('slot') || '';
+                    if (sk[slot] === undefined) {
+                        sk[slot] = [];
+                    }
+                    sk[slot].push(lightChild);
+                }
+            }
+            this.groupedLightChildren = groupedLightChildren;
+            this.copy = true;
         });
     }
 }
 SceaduFæx.is = 'sceadu-fæx';
-export const loadFragmentWithSlots = ({ copy, from, self, lightTemplate }) => {
-    loadFragment(self);
-};
-const propActions = [loadFragmentWithSlots];
-const propDefMap = {
-    lightTemplate: {
-        type: Object,
-        async: true,
-        dry: true,
-        stopReactionsIfFalsy: true,
-    }
-};
-const slicedPropDefs = xc.getSlicedPropDefs(propDefMap);
-xc.letThereBeProps(SceaduFæx, slicedPropDefs, 'onPropChange');
+// const propDefMap: PropDefMap<SceaduFæx> = {
+//     groupedLightChildren: {
+//         type: Object,
+//         async: true,
+//         dry: true,
+//         stopReactionsIfFalsy: true,
+//     }
+// };
+// const slicedPropDefs = xc.getSlicedPropDefs(propDefMap);
+// xc.letThereBeProps(SceaduFæx, slicedPropDefs, 'onPropChange');
 xc.define(SceaduFæx);
