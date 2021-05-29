@@ -15,11 +15,11 @@
         </fieldset>
     </template>
         
-    <sceadu-fæx from=./my-field-category-holder><template>
+    <sceadu-fæx from=./my-field-category-holder>
         <templ-model label="My Legend"></templ-model>
-        <ref-to a=my-grid slot=field-container></ref-to>
-        <ref-to a=my-chart slot=field-container></ref-to>
-    </template></sceadu-fæx>
+        <ref-to a=my-grid slot-nik=field-container></ref-to>
+        <ref-to a=my-chart slot-nik=field-container></ref-to>
+    </sceadu-fæx>
     <script type=importmap>
         {
             "imports":{
@@ -39,6 +39,7 @@
         import '../sceadu-fæx.js';
         import 'slot-nik/slot-nik.js';
         import 'templ-model/templ-model.js';
+        import 'ref-to/ref-to.js';
     </script>
 </body>
 </html>

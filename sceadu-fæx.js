@@ -12,7 +12,8 @@ export class SceaduFæx extends XtalFragment {
         const grouped = this.groupedLightChildren;
         let clonedTemplate;
         if (grouped.templModel !== undefined) {
-            clonedTemplate = new TemplateInstance(templ, grouped.templModel);
+            clonedTemplate = new TemplateInstance(templ, grouped.templModel.value);
+            grouped.templModel.templateInstance = clonedTemplate;
         }
         else {
             clonedTemplate = super.cloneTemplate(templ);
@@ -45,11 +46,11 @@ export class SceaduFæx extends XtalFragment {
                     groupedLightChildren.templModel = lightChild;
                 }
                 else if (lightChild instanceof RefTo) {
-                    const slot = lightChild.getAttribute('slot') || '';
-                    if (sk[slot] === undefined) {
-                        sk[slot] = [];
+                    const slotnik = lightChild.getAttribute('slot-nik') || '';
+                    if (sk[slotnik] === undefined) {
+                        sk[slotnik] = [];
                     }
-                    sk[slot].push(lightChild);
+                    sk[slotnik].push(lightChild);
                 }
             }
             this.groupedLightChildren = groupedLightChildren;
@@ -58,14 +59,4 @@ export class SceaduFæx extends XtalFragment {
     }
 }
 SceaduFæx.is = 'sceadu-fæx';
-// const propDefMap: PropDefMap<SceaduFæx> = {
-//     groupedLightChildren: {
-//         type: Object,
-//         async: true,
-//         dry: true,
-//         stopReactionsIfFalsy: true,
-//     }
-// };
-// const slicedPropDefs = xc.getSlicedPropDefs(propDefMap);
-// xc.letThereBeProps(SceaduFæx, slicedPropDefs, 'onPropChange');
 xc.define(SceaduFæx);
