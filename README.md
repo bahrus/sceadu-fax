@@ -1,6 +1,6 @@
 # sceadu-fæx
 
-## Shadow DOM Facsimile [TODO]
+## Shadow DOM Facsimile
 
 There's a [promising](https://github.com/WICG/webcomponents/issues/909) proposal that recognizes that the slot mechanism ShadowDOM provides is useful even outside the confines of style encapsulation.
 
