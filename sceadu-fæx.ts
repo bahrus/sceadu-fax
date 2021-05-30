@@ -36,7 +36,6 @@ export class SceaduFæx extends XtalFragment{
         const slot = sr.firstChild as HTMLSlotElement;
         sr.addEventListener('slotchange', e => {
             if(this.groupedLightChildren !== undefined){
-                //console.error('Change to light children ignored'); //TODO?
                 return;
             }
             const assignedElements = slot.assignedElements();
@@ -64,7 +63,6 @@ export class SceaduFæx extends XtalFragment{
             slot.addEventListener('element-created', e => {
                 const refTo = e.target as RefTo;
                 const slotnik = refTo.getAttribute('slot-nik') || '';
-                //TODO:  figure out why this.groupedRange isn't working.
                 let ns = this.nextElementSibling;
                 while(ns !== null){
                     let dest: Element | undefined;
