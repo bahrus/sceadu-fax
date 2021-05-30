@@ -1,10 +1,27 @@
 {
   "name": "sceadu-fax",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "is a web component that provides limited support for slotting without using native ShadowDOM.",
+  "main": "shadow-fax.js",
+  "module": "shadow-fax.js",
+  "typings": "types.d.ts",
+  "exports": {
+    ".": "./shadow-fax.js",
+    "./shadow-fax.js": "./shadow-fax.js",
+    "./sceadu-fæx.js": "./sceadu-fæx.js"
+  },
+  "files": [
+    "*.js",
+    "*.ts"
+  ],
+  "keywords": [
+    "webcomponents",
+    "ShadowDOM",
+    "templates"
+  ],
   "scripts": {
     "serve": "node node_modules/xtal-test/serve.js",
+    "package-check": "package-check",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -15,13 +32,14 @@
   },
   "devDependencies": {
     "slot-nik": "0.0.2",
-    "xtal-test": "0.0.50"
+    "xtal-test": "0.0.50",
+    "@skypack/package-check": "0.2.2"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bahrus/sceadu-fax.git"
   },
-  "author": "",
+  "author": "anderson.bruce.b@gmail.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bahrus/sceadu-fax/issues"
