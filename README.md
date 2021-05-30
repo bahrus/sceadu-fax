@@ -52,7 +52,7 @@ generates:
 </fieldset>
 ```
 
-As we can see, sceadu-fæx works best in conjunction with web component [slot-nik](https://github.com/bahrus/slot-nik).
+As we can see, sceadu-fæx works best in conjunction with web components [slot-nik](https://github.com/bahrus/slot-nik), which emulates slots, and [ref-to](https://github.com/bahrus/ref-to), which creates references to live slotted elements (based on the a attribute).
 
 **NB:**  This component might not play well with other rendering libraries. For a rendering library to be compatible with this component, it must use the following API:
 
