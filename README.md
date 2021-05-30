@@ -61,8 +61,8 @@ As we can see, sceadu-fæx works best in conjunction with web components [slot-n
 
 ## What happens when the light children change?
 
-1.  If ref-to removed, the element it created is removed.
-2.  If ref-to added with a slot attribute, it is appended to the grouped sibling managed for that slot.
-3.  Changes to the actual element must be done via refToElement.myElement, if it exists.
+1.  If ref-to is removed, the element it created is removed.
+2.  If a ref-to element is added with a slot-nik attribute, it is appended to the grouped sibling managed for that slot.
+3.  Changes to the actual element must be done via refToElement.deref, if it exists.
 
 
